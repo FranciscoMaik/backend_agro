@@ -1,8 +1,6 @@
-import { User } from '@prisma/client';
-
 import { prisma } from '@infra/database';
 
-import { RepositoryInterface } from '@application/types';
+import { RepositoryInterface, User } from '@application/types';
 
 class UsersRepository implements Omit<RepositoryInterface<User>, 'findAll'> {
   async findOne(id: string) {
@@ -10,7 +8,17 @@ class UsersRepository implements Omit<RepositoryInterface<User>, 'findAll'> {
     return user;
   }
 
-  async create(data: Omit<User, 'id' | 'createdAt' | 'updatedAt'>) {
+  async findByEmail(email: string) {
+    const user = await prisma.user.findFirst({ where: { email } });
+    return user;
+  }
+
+  async findByCpf(cpf: string) {
+    const user = await prisma.user.findFirst({ where: { cpf } });
+    return user;
+  }
+
+  async create(data: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'active'>) {
     const user = await prisma.user.create({ data });
     return user;
   }

@@ -16,7 +16,7 @@ model User {
   address      String?  @db.VarChar(255)
   formation    String   @db.VarChar(255)
   account_type String   @db.VarChar(255)
-  active       Boolean
+  active       Boolean  @default(true)
   code         Int
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt

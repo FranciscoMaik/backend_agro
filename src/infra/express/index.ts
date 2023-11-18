@@ -5,6 +5,8 @@ import express, { json, Express } from 'express';
 
 import { ExpressServerInterface } from '@infra/types';
 
+import { errorMiddleware } from './middlewares';
+
 export class ExpressServer implements ExpressServerInterface {
   private express: Express;
   private port: number;
@@ -14,11 +16,16 @@ export class ExpressServer implements ExpressServerInterface {
     this.port = port;
 
     this.config();
+    this.handlers();
   }
 
   private config() {
     this.express.use(json());
     this.express.use(cors());
+  }
+
+  private handlers() {
+    this.express.use(errorMiddleware);
   }
 
   public start() {
