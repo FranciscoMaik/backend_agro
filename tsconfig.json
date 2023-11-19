@@ -11,11 +11,11 @@
     "skipLibCheck": true,
 
     "paths": {
-      "@libs/*": ["./libs/*"],
+      "@libs": ["./libs/index"],
       "@infra/*": ["./infra/*"],
       "@application/*": ["./application/*"],
-      "@controllers/*": ["./application/controllers/*"],
-      "@repositories/*": ["./application/repositories/*"],
+      "@controllers": ["./application/controllers/index.ts"],
+      "@repositories": ["./application/repositories/index.ts"],
     }
   }
 }

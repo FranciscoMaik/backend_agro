@@ -30,3 +30,9 @@ export class AlreadyExistError extends ApiError {
     super(message, 409);
   }
 }
+
+export class ServerError extends ApiError {
+  constructor(message: string) {
+    super(message, 500);
+  }
+}

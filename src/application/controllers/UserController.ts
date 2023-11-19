@@ -1,12 +1,11 @@
 import { Request, Response } from 'express';
 
-import { AlreadyExistError, NotFoundError } from '@infra/express/errors';
-
+import { AlreadyExistError, NotFoundError } from '@application/errors';
 import { ControllerInterface, User } from '@application/types';
 
-import { usersRepository } from '@repositories/index';
+import { usersRepository } from '@repositories';
 
-import { Crypter } from '@libs/Crypter';
+import { Crypter } from '@libs';
 
 interface StoreRequest {
   email: string;

@@ -6,6 +6,7 @@ import express, { json, Express } from 'express';
 import { ExpressServerInterface } from '@infra/types';
 
 import { errorMiddleware } from './middlewares';
+import { appRoutes } from './routes';
 
 export class ExpressServer implements ExpressServerInterface {
   private express: Express;
@@ -25,6 +26,7 @@ export class ExpressServer implements ExpressServerInterface {
   }
 
   private handlers() {
+    this.express.use(appRoutes);
     this.express.use(errorMiddleware);
   }
 
