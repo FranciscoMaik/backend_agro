@@ -1,9 +1,10 @@
 import { Router } from 'express';
 
-import { AuthController } from '@application/controllers';
+import { authenticateController } from '@application/auth/infra/controllers';
+import { authenticateValidator } from '@application/auth/infra/validators';
 
 const authRoutes = Router();
 
-authRoutes.post('/auth', AuthController.authenticate);
+authRoutes.post('/auth', authenticateValidator, authenticateController.handle);
 
 export { authRoutes };

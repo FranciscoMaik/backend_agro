@@ -31,6 +31,8 @@ export class ExpressServer implements ExpressServerInterface {
   }
 
   public start() {
-    this.express.listen(this.port, () => console.log('Server started 🗿🍷'));
+    this.express.listen(this.port, () =>
+      console.log(`Server started on port ${this.port} 🗿🍷`),
+    );
   }
 }

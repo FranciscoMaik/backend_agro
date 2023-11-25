@@ -1,9 +1,10 @@
 import { prisma } from '@infra/database';
+import { RepositoryInterface } from '@infra/types/RepositoryInterface';
 
-import { RepositoryInterface, User } from '@application/types';
+import { User } from '@application/commons/types';
 
 class UsersRepository implements Omit<RepositoryInterface<User>, 'findAll'> {
-  async findOne(id: string) {
+  async findById(id: string) {
     const user = await prisma.user.findFirst({ where: { id } });
     return user;
   }
@@ -18,7 +19,7 @@ class UsersRepository implements Omit<RepositoryInterface<User>, 'findAll'> {
     return user;
   }
 
-  async create(data: Omit<User, 'id' | 'createdAt' | 'updatedAt' | 'active'>) {
+  async create(data: Omit<User, 'id' | 'createdAt' | 'updatedAt'>) {
     const user = await prisma.user.create({ data });
     return user;
   }
@@ -33,4 +34,4 @@ class UsersRepository implements Omit<RepositoryInterface<User>, 'findAll'> {
   }
 }
 
-export default new UsersRepository();
+export const usersRepository = new UsersRepository();

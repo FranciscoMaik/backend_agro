@@ -1,4 +1,3 @@
-import { Request, Response } from 'express';
 import { userTokenExpiration } from 'utils/constants';
 import { isEmpty } from 'utils/validators';
 
@@ -6,29 +5,28 @@ import {
   BadRequestError,
   NotFoundError,
   UnauthorizedError,
-} from '@application/errors';
-import { usersRepository } from '@application/repositories';
-import { User } from '@application/types';
+} from '@infra/express/errors';
+
+import { User } from '@application/commons/types';
+import { usersRepository } from '@application/user/infra/repository/UsersRepository';
 
 import { Crypter, Token } from '@libs';
 
-interface AuthenticateRequest {
+interface RequestInterface {
   email: string;
   password: string;
 }
 
-class AuthController {
-  public async authenticate(req: Request, res: Response) {
-    const { email, password } = req.body as AuthenticateRequest;
-
+export class AuthenticateService {
+  public async execute({ email, password }: RequestInterface) {
     if (isEmpty(email) || isEmpty(password)) {
-      throw new BadRequestError('Email or password are empty');
+      throw new BadRequestError('email or password are empty');
     }
 
     const user: Partial<User | null> = await usersRepository.findByEmail(email);
 
     if (!user) {
-      throw new NotFoundError('User not found');
+      throw new NotFoundError('user not found');
     }
 
     const crypter = new Crypter();
@@ -36,7 +34,7 @@ class AuthController {
     const isEqualPassword = await crypter.compare(password, user.password!);
 
     if (!isEqualPassword) {
-      throw new UnauthorizedError('Password are wrong');
+      throw new UnauthorizedError('password is wrong');
     }
 
     const token = new Token(process.env.USER_TOKEN_KEY);
@@ -48,8 +46,9 @@ class AuthController {
 
     delete user.password;
 
-    res.status(200).json({ user, token: userToken });
+    return {
+      user,
+      token: userToken,
+    };
   }
 }
-
-export default new AuthController();

@@ -1,0 +1,1 @@
+export { authenticateValidator } from './authenticateValidator';

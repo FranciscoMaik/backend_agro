@@ -1,12 +1,23 @@
 import { Router } from 'express';
 
-import { UserController } from '@controllers';
+import {
+  createUserController,
+  deleteUserController,
+  getUserController,
+  softDeleteUserController,
+  updateUserController,
+} from '@application/user/infra/controllers';
+import { storeValidator } from '@application/user/infra/validators';
+
+import { authMiddleware } from '../middlewares';
 
 const userRoutes = Router();
 
-userRoutes.get('/users', UserController.show);
-userRoutes.post('/users', UserController.store);
-userRoutes.patch('/users', UserController.update);
-userRoutes.delete('/users', UserController.delete);
+userRoutes.post('/users', storeValidator, createUserController.handle);
+
+userRoutes.get('/users', authMiddleware, getUserController.handle);
+userRoutes.patch('/users', authMiddleware, updateUserController.handle);
+userRoutes.put('/users/soft', authMiddleware, softDeleteUserController.handle);
+userRoutes.delete('/users', authMiddleware, deleteUserController.handle);
 
 export { userRoutes };

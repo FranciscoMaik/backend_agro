@@ -4,7 +4,7 @@ export interface User {
   email: string;
   password: string;
   cpf: string;
-  address: string | null;
+  address?: string | null;
   formation: string;
   account_type: string;
   active: boolean;

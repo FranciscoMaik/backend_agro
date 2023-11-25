@@ -1,3 +1,3 @@
 export interface ExpressServerInterface {
-  start: () => void;
+  start(): void;
 }
