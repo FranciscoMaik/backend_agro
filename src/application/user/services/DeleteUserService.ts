@@ -1,4 +1,4 @@
-import { usersRepository } from '../infra/repository/UsersRepository';
+import { usersRepository } from '../infra/repositories/UsersRepository';
 
 interface ServiceInterface {
   id: string;

@@ -2,7 +2,7 @@ import { AlreadyExistError, NotFoundError } from '@infra/express/errors';
 
 import { User } from '@application/commons/types';
 
-import { usersRepository } from '../infra/repository/UsersRepository';
+import { usersRepository } from '../infra/repositories/UsersRepository';
 
 type ServiceInterface = User;
 

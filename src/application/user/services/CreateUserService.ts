@@ -4,7 +4,7 @@ import { User } from '@application/commons/types';
 
 import { Crypter } from '@libs';
 
-import { usersRepository } from '../infra/repository/UsersRepository';
+import { usersRepository } from '../infra/repositories/UsersRepository';
 
 interface ServiceInterface {
   email: string;

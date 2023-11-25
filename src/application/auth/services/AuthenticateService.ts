@@ -8,7 +8,7 @@ import {
 } from '@infra/express/errors';
 
 import { User } from '@application/commons/types';
-import { usersRepository } from '@application/user/infra/repository/UsersRepository';
+import { usersRepository } from '@application/user/infra/repositories/UsersRepository';
 
 import { Crypter, Token } from '@libs';
 

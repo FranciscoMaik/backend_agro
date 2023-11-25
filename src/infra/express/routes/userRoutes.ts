@@ -16,8 +16,15 @@ const userRoutes = Router();
 userRoutes.post('/users', storeValidator, createUserController.handle);
 
 userRoutes.get('/users', authMiddleware, getUserController.handle);
-userRoutes.patch('/users', authMiddleware, updateUserController.handle);
-userRoutes.put('/users/soft', authMiddleware, softDeleteUserController.handle);
+
+userRoutes.put('/users', authMiddleware, updateUserController.handle);
+
+userRoutes.patch(
+  '/users/soft-delete',
+  authMiddleware,
+  softDeleteUserController.handle,
+);
+
 userRoutes.delete('/users', authMiddleware, deleteUserController.handle);
 
 export { userRoutes };

@@ -1,9 +1,8 @@
 import { prisma } from '@infra/database';
-import { RepositoryInterface } from '@infra/types/RepositoryInterface';
 
 import { User } from '@application/commons/types';
 
-class UsersRepository implements Omit<RepositoryInterface<User>, 'findAll'> {
+class UsersRepository {
   async findById(id: string) {
     const user = await prisma.user.findFirst({ where: { id } });
     return user;
@@ -30,7 +29,7 @@ class UsersRepository implements Omit<RepositoryInterface<User>, 'findAll'> {
   }
 
   async delete(id: string) {
-    prisma.user.delete({ where: { id } });
+    await prisma.user.delete({ where: { id } });
   }
 }
 
