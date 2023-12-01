@@ -1,9 +1,28 @@
 import { Request, Response } from 'express';
 
-export class CreateFarmerController {
-  handle(req: Request, res: Response) {
-    const userId = req.userId;
+import { updateFarmerService } from '@application/farmer/services';
 
-    res.status(201).json({});
+interface RequestInterface {
+  name: string;
+  nickname: string;
+  gender: string;
+  phone: string;
+  cpf: string;
+  address: string;
+  marital_status: string;
+  credit_line: string;
+  course: string;
+}
+
+export class UpdateFarmerController {
+  async handle(req: Request, res: Response) {
+    const data = req.body as RequestInterface;
+    const { id } = req.params;
+
+    const farmer = await updateFarmerService.execute({ ...data, id });
+
+    res.status(200).json({ farmer });
   }
 }
+
+export const updateFarmerController = new UpdateFarmerController();

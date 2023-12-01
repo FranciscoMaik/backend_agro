@@ -14,8 +14,6 @@
       "@libs": ["./libs/index"],
       "@infra/*": ["./infra/*"],
       "@application/*": ["./application/*"],
-      "@controllers": ["./application/controllers/index.ts"],
-      "@repositories": ["./application/repositories/index.ts"],
     }
   }
 }

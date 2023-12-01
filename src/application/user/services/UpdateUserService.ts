@@ -1,24 +1,41 @@
-import { AlreadyExistError, NotFoundError } from '@infra/express/errors';
-
+import {
+  AlreadyExistError,
+  BadRequestError,
+} from '@application/commons/errors';
 import { User } from '@application/commons/types';
 
-import { usersRepository } from '../infra/repositories/UsersRepository';
+import { usersRepository } from '../infra/repositories';
+import { getUserService } from './GetUserService';
 
-type ServiceInterface = User;
+interface ServiceInterface {
+  id: string;
+  name: string;
+  email: string;
+  cpf: string;
+  formation: string;
+  address?: string | null;
+}
 
-export class UpdateUserService {
-  public async execute(user: ServiceInterface) {
-    const userExists = await usersRepository.findById(user.id);
-
-    if (!userExists) {
-      throw new NotFoundError('user not found');
+class UpdateUserService {
+  public async execute({
+    id,
+    email,
+    cpf,
+    name,
+    formation,
+    address,
+  }: ServiceInterface) {
+    if (cpf.length !== 11) {
+      throw new BadRequestError('cpf must have 11 characters');
     }
 
-    const isEmailChanged = userExists.email !== user.email;
-    const isCpfChanged = userExists.cpf !== user.cpf;
+    const user = await getUserService.execute({ id });
+
+    const isEmailChanged = user.email !== email;
+    const isCpfChanged = user.cpf !== cpf;
 
     if (isEmailChanged) {
-      const userEmailExists = await usersRepository.findByEmail(user.email);
+      const userEmailExists = await usersRepository.findByEmail(email);
 
       if (userEmailExists) {
         throw new AlreadyExistError('this email already exists');
@@ -26,15 +43,32 @@ export class UpdateUserService {
     }
 
     if (isCpfChanged) {
-      const userCpfExists = await usersRepository.findByCpf(user.cpf);
+      const userCpfExists = await usersRepository.findByCpf(cpf);
 
       if (userCpfExists) {
         throw new AlreadyExistError('this cpf already exists');
       }
     }
 
-    const updatedUser = await usersRepository.update(user);
+    const data: User = {
+      id,
+      email,
+      cpf,
+      name,
+      formation,
+      address,
+      password: user.password,
+      account_type: user.account_type,
+      active: user.active,
+      code: user.code,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt,
+    };
+
+    const updatedUser = await usersRepository.update(data);
 
     return updatedUser;
   }
 }
+
+export const updateUserService = new UpdateUserService();

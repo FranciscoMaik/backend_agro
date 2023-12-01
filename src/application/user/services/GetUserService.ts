@@ -1,12 +1,12 @@
-import { NotFoundError } from '@infra/express/errors';
+import { NotFoundError } from '@application/commons/errors';
 
-import { usersRepository } from '../infra/repositories/UsersRepository';
+import { usersRepository } from '../infra/repositories';
 
 interface ServiceInterface {
   id: string;
 }
 
-export class GetUserService {
+class GetUserService {
   public async execute({ id }: ServiceInterface) {
     const user = await usersRepository.findById(id);
 
@@ -17,3 +17,5 @@ export class GetUserService {
     return user;
   }
 }
+
+export const getUserService = new GetUserService();

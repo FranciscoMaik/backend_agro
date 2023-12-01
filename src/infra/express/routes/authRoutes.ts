@@ -5,6 +5,6 @@ import { authenticateValidator } from '@application/auth/infra/validators';
 
 const authRoutes = Router();
 
-authRoutes.post('/auth', authenticateValidator, authenticateController.handle);
+authRoutes.post('/', authenticateValidator, authenticateController.handle);
 
 export { authRoutes };

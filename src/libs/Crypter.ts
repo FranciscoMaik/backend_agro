@@ -5,7 +5,7 @@ export class Crypter {
     return bcrypt.hashSync(value, salt);
   }
 
-  public async compare(value1: string, value2: string) {
-    return bcrypt.compare(value1, value2);
+  public async compare(value: string, hash: string) {
+    return bcrypt.compare(value, hash);
   }
 }

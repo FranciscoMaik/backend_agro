@@ -5,26 +5,35 @@ import {
   deleteUserController,
   getUserController,
   softDeleteUserController,
+  updatePasswordController,
   updateUserController,
 } from '@application/user/infra/controllers';
-import { storeValidator } from '@application/user/infra/validators';
+import {
+  createValidator,
+  updatePasswordValidator,
+  updateValidator,
+} from '@application/user/infra/validators';
 
 import { authMiddleware } from '../middlewares';
 
 const userRoutes = Router();
 
-userRoutes.post('/users', storeValidator, createUserController.handle);
+userRoutes.post('/', createValidator, createUserController.handle);
 
-userRoutes.get('/users', authMiddleware, getUserController.handle);
+userRoutes.use(authMiddleware);
 
-userRoutes.put('/users', authMiddleware, updateUserController.handle);
+userRoutes.get('/', getUserController.handle);
+
+userRoutes.put('/', updateValidator, updateUserController.handle);
+
+userRoutes.delete('/', deleteUserController.handle);
+
+userRoutes.patch('/soft-delete', softDeleteUserController.handle);
 
 userRoutes.patch(
-  '/users/soft-delete',
-  authMiddleware,
-  softDeleteUserController.handle,
+  '/password',
+  updatePasswordValidator,
+  updatePasswordController.handle,
 );
-
-userRoutes.delete('/users', authMiddleware, deleteUserController.handle);
 
 export { userRoutes };

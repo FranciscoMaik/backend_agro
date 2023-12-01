@@ -2,25 +2,25 @@ import { Request, Response, NextFunction } from 'express';
 
 import { mustBe, requiredFields } from '../../../commons/utils';
 
-export interface RequestInterface {
-  email: string;
+interface RequestInterface {
   password: string;
+  newPassword: string;
 }
 
-export const authenticateValidator = (
+export const updatePasswordValidator = (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const { email, password } = req.body as RequestInterface;
+  const { password, newPassword } = req.body as RequestInterface;
 
   requiredFields<RequestInterface>({
-    email,
     password,
+    newPassword,
   });
 
-  mustBe({ value: email, type: 'string' });
-  mustBe({ value: password, type: 'string' });
+  mustBe({ password, type: 'string' });
+  mustBe({ newPassword, type: 'string' });
 
   next();
 };

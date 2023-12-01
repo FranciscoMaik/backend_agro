@@ -1,3 +1,1 @@
-import { AuthenticateService } from './AuthenticateService';
-
-export const authenticateService = new AuthenticateService();
+export { authenticateService } from './AuthenticateService';

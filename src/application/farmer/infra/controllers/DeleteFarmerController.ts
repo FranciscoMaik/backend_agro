@@ -1,9 +1,15 @@
 import { Request, Response } from 'express';
 
-export class CreateFarmerController {
-  handle(req: Request, res: Response) {
-    const userId = req.userId;
+import { deleteFarmerService } from '@application/farmer/services';
 
-    res.status(201).json({});
+class DeleteFarmerController {
+  async handle(req: Request, res: Response) {
+    const { id } = req.params;
+
+    await deleteFarmerService.execute({ id });
+
+    res.status(204).send();
   }
 }
+
+export const deleteFarmerController = new DeleteFarmerController();

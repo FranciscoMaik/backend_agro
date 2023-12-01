@@ -34,6 +34,6 @@ export const authMiddleware = (
 
     return next();
   } catch {
-    throw new UnauthorizedError('token is wrong');
+    throw new UnauthorizedError('token is not valid');
   }
 };

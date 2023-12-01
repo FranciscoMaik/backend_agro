@@ -1,11 +1,15 @@
-import { usersRepository } from '../infra/repositories/UsersRepository';
+import { usersRepository } from '../infra/repositories';
+import { getUserService } from './GetUserService';
 
 interface ServiceInterface {
   id: string;
 }
 
-export class DeleteUserService {
+class DeleteUserService {
   public async execute({ id }: ServiceInterface) {
+    await getUserService.execute({ id });
     await usersRepository.delete(id);
   }
 }
+
+export const deleteUserService = new DeleteUserService();

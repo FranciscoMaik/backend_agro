@@ -13,6 +13,16 @@ class FarmersRepository {
     return farmer;
   }
 
+  async findByPhone(phone: string) {
+    const farmer = await prisma.farmer.findUnique({ where: { phone } });
+    return farmer;
+  }
+
+  async findByCpf(cpf: string) {
+    const farmer = await prisma.farmer.findUnique({ where: { cpf } });
+    return farmer;
+  }
+
   async create(data: Omit<Farmer, 'id' | 'createdAt' | 'updatedAt'>) {
     const farmer = await prisma.farmer.create({ data });
     return farmer;
@@ -25,10 +35,6 @@ class FarmersRepository {
 
   async delete(id: string) {
     await prisma.farmer.delete({ where: { id } });
-  }
-
-  async deleteAll(user_id: string) {
-    await prisma.farmer.deleteMany({ where: { user_id } });
   }
 }
 

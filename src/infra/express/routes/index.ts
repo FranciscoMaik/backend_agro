@@ -6,8 +6,8 @@ import { userRoutes } from './userRoutes';
 
 const appRoutes = Router();
 
-appRoutes.use(userRoutes);
-appRoutes.use(authRoutes);
-appRoutes.use(farmerRoutes);
+appRoutes.use('/users', userRoutes);
+appRoutes.use('/auth', authRoutes);
+appRoutes.use('/farmers', farmerRoutes);
 
 export { appRoutes };

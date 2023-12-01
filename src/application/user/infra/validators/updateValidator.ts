@@ -2,33 +2,30 @@ import { Request, Response, NextFunction } from 'express';
 
 import { mustBe, requiredFields } from '../../../commons/utils';
 
-interface StoreValidator {
+interface RequestInterface {
   email: string;
   name: string;
   cpf: string;
-  password: string;
   formation: string;
   address?: string | null;
 }
 
-export const storeValidator = (
+export const updateValidator = (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const { email, name, password, cpf, formation, address } =
-    req.body as StoreValidator;
+  const { email, name, cpf, formation, address } = req.body as RequestInterface;
 
-  requiredFields<StoreValidator>({
+  requiredFields<RequestInterface>({
     email,
     name,
-    password,
     cpf,
     formation,
   });
 
   mustBe({ email, type: 'string' });
-  mustBe({ password, type: 'string' });
+  mustBe({ name, type: 'string' });
   mustBe({ cpf, type: 'string' });
   mustBe({ formation, type: 'string' });
 

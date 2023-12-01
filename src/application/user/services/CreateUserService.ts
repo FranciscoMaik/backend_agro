@@ -1,10 +1,12 @@
-import { AlreadyExistError } from '@infra/express/errors';
-
+import {
+  AlreadyExistError,
+  BadRequestError,
+} from '@application/commons/errors';
 import { User } from '@application/commons/types';
 
 import { Crypter } from '@libs';
 
-import { usersRepository } from '../infra/repositories/UsersRepository';
+import { usersRepository } from '../infra/repositories';
 
 interface ServiceInterface {
   email: string;
@@ -15,7 +17,7 @@ interface ServiceInterface {
   address?: string | null;
 }
 
-export class CreateUserService {
+class CreateUserService {
   public async execute({
     email,
     cpf,
@@ -24,6 +26,10 @@ export class CreateUserService {
     formation,
     address,
   }: ServiceInterface) {
+    if (cpf.length !== 11) {
+      throw new BadRequestError('cpf must have 11 characters');
+    }
+
     const userEmailExists = await usersRepository.findByEmail(email);
 
     if (userEmailExists) {
@@ -50,10 +56,10 @@ export class CreateUserService {
       code: Math.round(Math.random() * 999999),
     };
 
-    const user: Partial<User> = await usersRepository.create(data);
-
-    delete user.password;
+    const user = await usersRepository.create(data);
 
     return user;
   }
 }
+
+export const createUserService = new CreateUserService();

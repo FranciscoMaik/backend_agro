@@ -1,19 +1,16 @@
-import { NotFoundError } from '@infra/express/errors';
-
-import { usersRepository } from '../infra/repositories/UsersRepository';
+import { usersRepository } from '../infra/repositories';
+import { getUserService } from './GetUserService';
 
 interface ServiceInterface {
   id: string;
 }
 
-export class SoftDeleteUserService {
+class SoftDeleteUserService {
   public async execute({ id }: ServiceInterface) {
-    const user = await usersRepository.findById(id);
-
-    if (!user) {
-      throw new NotFoundError('user not found');
-    }
+    const user = await getUserService.execute({ id });
 
     await usersRepository.update({ ...user, active: false });
   }
 }
+
+export const softDeleteUserService = new SoftDeleteUserService();

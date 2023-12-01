@@ -1,3 +1,1 @@
-import { AuthenticateController } from './AuthenticateController';
-
-export const authenticateController = new AuthenticateController();
+export { authenticateController } from './AuthenticateController';
