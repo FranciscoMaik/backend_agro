@@ -29,9 +29,7 @@ class UpdatePasswordService {
       password: crypter.hash(newPassword),
     };
 
-    const updatedUser = await usersRepository.update(data);
-
-    return updatedUser;
+    await usersRepository.update(data);
   }
 }
 

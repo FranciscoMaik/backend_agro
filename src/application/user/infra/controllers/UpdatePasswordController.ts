@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 
-import { User } from '@application/commons/types';
 import { updatePasswordService } from '@application/user/services';
 
 interface RequestInterface {
@@ -14,15 +13,13 @@ class UpdatePasswordController {
 
     const id = req.userId;
 
-    const user: Partial<User> = await updatePasswordService.execute({
+    await updatePasswordService.execute({
       id,
       password,
       newPassword,
     });
 
-    delete user.password;
-
-    res.status(200).json({ user });
+    res.status(204).send();
   }
 }
 
