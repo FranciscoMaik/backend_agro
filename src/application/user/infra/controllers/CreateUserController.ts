@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 
+import { userMapper } from '@application/@shared/utils';
 import { createUserService } from '@application/user/services';
-
-import { User } from '@shared/types';
 
 interface RequestInterface {
   email: string;
@@ -17,11 +16,9 @@ class CreateUserController {
   public async handle(req: Request, res: Response) {
     const data = req.body as RequestInterface;
 
-    const user: Partial<User> = await createUserService.execute(data);
+    const user = await createUserService.execute(data);
 
-    delete user.password;
-
-    res.status(201).json({ user });
+    res.status(201).json({ user: userMapper(user) });
   }
 }
 

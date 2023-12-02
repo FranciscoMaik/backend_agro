@@ -8,7 +8,7 @@ export interface User {
   formation: string;
   account_type: string;
   active: boolean;
-  code: number;
+  code: number | null;
   verified: boolean;
   createdAt: Date;
   updatedAt: Date;

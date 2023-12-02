@@ -4,23 +4,20 @@ import { mustBe, requiredFields } from '@shared/utils';
 
 interface RequestInterface {
   email: string;
-  password: string;
 }
 
-export const authenticateValidator = (
+export const sendVerificationEmailValidator = (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const { email, password } = req.body as RequestInterface;
+  const { email } = req.body as RequestInterface;
 
   requiredFields<RequestInterface>({
     email,
-    password,
   });
 
   mustBe({ value: email, type: 'string' });
-  mustBe({ value: password, type: 'string' });
 
   next();
 };

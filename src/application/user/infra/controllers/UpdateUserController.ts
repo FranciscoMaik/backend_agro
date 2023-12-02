@@ -1,8 +1,7 @@
 import { Request, Response } from 'express';
 
+import { userMapper } from '@application/@shared/utils';
 import { updateUserService } from '@application/user/services';
-
-import { User } from '@shared/types';
 
 interface RequestInterface {
   name: string;
@@ -18,14 +17,12 @@ class UpdateUserController {
     const data = req.body as RequestInterface;
     const id = req.userId;
 
-    const user: Partial<User> = await updateUserService.execute({
+    const user = await updateUserService.execute({
       ...data,
       id,
     });
 
-    delete user.password;
-
-    res.status(200).json({ user });
+    res.status(200).json({ user: userMapper(user) });
   }
 }
 
