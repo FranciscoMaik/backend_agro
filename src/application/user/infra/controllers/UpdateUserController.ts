@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 
-import { User } from '@application/commons/types';
 import { updateUserService } from '@application/user/services';
+
+import { User } from '@shared/types';
 
 interface RequestInterface {
   name: string;

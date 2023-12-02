@@ -1,8 +1,5 @@
-import {
-  AlreadyExistError,
-  BadRequestError,
-} from '@application/commons/errors';
-import { Farmer } from '@application/commons/types';
+import { AlreadyExistError, BadRequestError } from '@shared/errors';
+import { Farmer } from '@shared/types';
 
 import farmersRepository from '../infra/repositories/FarmersRepository';
 

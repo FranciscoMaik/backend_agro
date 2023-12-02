@@ -1,12 +1,13 @@
 import { userTokenExpiration } from 'utils/constants';
 import { isEmpty } from 'utils/validators';
 
+import { usersRepository } from '@application/user/infra/repositories';
+
 import {
   BadRequestError,
   NotFoundError,
   UnauthorizedError,
-} from '@application/commons/errors';
-import { usersRepository } from '@application/user/infra/repositories';
+} from '@shared/errors';
 
 import { Crypter, Token } from '@libs';
 

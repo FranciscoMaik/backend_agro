@@ -1,8 +1,5 @@
-import {
-  AlreadyExistError,
-  BadRequestError,
-} from '@application/commons/errors';
-import { User } from '@application/commons/types';
+import { AlreadyExistError, BadRequestError } from '@shared/errors';
+import { User } from '@shared/types';
 
 import { Crypter } from '@libs';
 

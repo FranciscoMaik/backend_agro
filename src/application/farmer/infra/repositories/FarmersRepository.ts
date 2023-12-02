@@ -1,6 +1,6 @@
 import { prisma } from '@infra/database';
 
-import { Farmer } from '@application/commons/types';
+import { Farmer } from '@shared/types';
 
 class FarmersRepository {
   async findAll(user_id: string) {

@@ -1,4 +1,4 @@
-import { NotFoundError } from '@application/commons/errors';
+import { NotFoundError } from '@shared/errors';
 
 import farmersRepository from '../infra/repositories/FarmersRepository';
 

@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 
 import { authenticateService } from '@application/auth/services';
-import { User } from '@application/commons/types';
+
+import { User } from '@shared/types';
 
 interface RequestInterface {
   email: string;

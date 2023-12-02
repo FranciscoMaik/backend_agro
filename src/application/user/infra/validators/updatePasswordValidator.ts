@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 
-import { mustBe, requiredFields } from '../../../commons/utils';
+import { mustBe, requiredFields } from '@shared/utils';
 
 interface RequestInterface {
   password: string;

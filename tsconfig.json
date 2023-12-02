@@ -14,6 +14,7 @@
       "@libs": ["./libs/index"],
       "@infra/*": ["./infra/*"],
       "@application/*": ["./application/*"],
+      "@shared/*": ["./application/@shared/*"]
     }
   }
 }

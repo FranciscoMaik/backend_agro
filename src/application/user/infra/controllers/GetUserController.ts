@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 
-import { User } from '@application/commons/types';
 import { getUserService } from '@application/user/services';
+
+import { User } from '@shared/types';
 
 class GetUserController {
   public async handle(req: Request, res: Response) {

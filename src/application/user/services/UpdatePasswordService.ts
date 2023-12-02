@@ -1,5 +1,5 @@
-import { UnauthorizedError } from '@application/commons/errors';
-import { User } from '@application/commons/types';
+import { UnauthorizedError } from '@shared/errors';
+import { User } from '@shared/types';
 
 import { Crypter } from '@libs';
 

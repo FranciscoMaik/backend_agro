@@ -1,4 +1,4 @@
-import { BadRequestError } from '@application/commons/errors';
+import { BadRequestError } from '@shared/errors';
 
 type Type = 'string' | 'number' | 'object';
 

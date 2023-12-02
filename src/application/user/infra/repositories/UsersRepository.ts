@@ -1,6 +1,6 @@
 import { prisma } from '@infra/database';
 
-import { User } from '@application/commons/types';
+import { User } from '@shared/types';
 
 class UsersRepository {
   async findById(id: string) {

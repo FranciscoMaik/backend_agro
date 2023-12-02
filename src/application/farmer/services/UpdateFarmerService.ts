@@ -2,8 +2,8 @@ import {
   AlreadyExistError,
   BadRequestError,
   NotFoundError,
-} from '@application/commons/errors';
-import { Farmer } from '@application/commons/types';
+} from '@shared/errors';
+import { Farmer } from '@shared/types';
 
 import farmersRepository from '../infra/repositories/FarmersRepository';
 
