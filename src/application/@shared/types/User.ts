@@ -9,6 +9,7 @@ export interface User {
   account_type: string;
   active: boolean;
   code: number;
+  verified: boolean;
   createdAt: Date;
   updatedAt: Date;
 }

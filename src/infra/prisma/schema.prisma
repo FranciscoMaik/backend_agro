@@ -18,6 +18,7 @@ model User {
   account_type String   @db.VarChar(255)
   active       Boolean  @default(true)
   code         Int
+  verified     Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   Farmer       Farmer[]

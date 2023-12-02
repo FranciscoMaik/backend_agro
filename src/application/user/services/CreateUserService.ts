@@ -49,6 +49,7 @@ class CreateUserService {
       formation,
       account_type: 'user',
       active: true,
+      verified: false,
       password: crypter.hash(password),
       code: Math.round(Math.random() * 999999),
     };
