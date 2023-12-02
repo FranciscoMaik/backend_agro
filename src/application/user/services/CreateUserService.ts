@@ -1,4 +1,4 @@
-import { sendVerificationEmailService } from '@application/auth/services';
+import { sendEmailVerificationService } from '@application/auth/services';
 
 import { AlreadyExistError, BadRequestError } from '@shared/errors';
 import { User } from '@shared/types';
@@ -58,7 +58,7 @@ class CreateUserService {
 
     const user = await usersRepository.create(data);
 
-    sendVerificationEmailService.execute({ email });
+    sendEmailVerificationService.execute({ email });
 
     return user;
   }

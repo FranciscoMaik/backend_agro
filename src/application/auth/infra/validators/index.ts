@@ -1,2 +1,3 @@
 export { authenticateValidator } from './authenticateValidator';
-export { sendVerificationEmailValidator } from './sendVerificationEmailValidator';
+export { sendEmailVerificationValidator } from './sendEmailVerificationValidator';
+export { emailVerificationValidator } from './emailVerificationValidator';

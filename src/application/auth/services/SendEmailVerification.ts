@@ -8,7 +8,7 @@ interface ServiceInterface {
   email: string;
 }
 
-class SendVerificationEmailService {
+class SendEmailVerificationService {
   async execute({ email }: ServiceInterface) {
     const user = await usersRepository.findByEmail(email);
 
@@ -40,4 +40,4 @@ class SendVerificationEmailService {
   }
 }
 
-export const sendVerificationEmailService = new SendVerificationEmailService();
+export const sendEmailVerificationService = new SendEmailVerificationService();

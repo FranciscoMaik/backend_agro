@@ -6,7 +6,7 @@ interface RequestInterface {
   email: string;
 }
 
-export const sendVerificationEmailValidator = (
+export const sendEmailVerificationValidator = (
   req: Request,
   res: Response,
   next: NextFunction,

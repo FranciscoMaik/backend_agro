@@ -58,7 +58,7 @@ class UpdateUserService {
       account_type: user.account_type,
       active: user.active,
       code: user.code,
-      verified: user.verified,
+      verified: isEmailChanged ? false : user.verified,
       createdAt: user.createdAt,
       updatedAt: user.updatedAt,
     };

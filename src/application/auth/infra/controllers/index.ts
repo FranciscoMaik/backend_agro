@@ -1,2 +1,3 @@
 export { authenticateController } from './AuthenticateController';
-export { sendVerificationEmailController } from './SendVerificationEmailController';
+export { sendEmailVerificationController } from './SendEmailVerificationConrtoller';
+export { emailVerificationController } from './EmailVerificationController';

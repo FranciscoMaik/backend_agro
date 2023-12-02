@@ -1,2 +1,3 @@
 export { authenticateService } from './AuthenticateService';
-export { sendVerificationEmailService } from './SendVerificationEmailService';
+export { sendEmailVerificationService } from './SendEmailVerification';
+export { emailVerificationService } from './EmailVerificationService';
