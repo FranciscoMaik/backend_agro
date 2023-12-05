@@ -3,21 +3,21 @@ import { Request, Response, NextFunction } from 'express';
 import { mustBe, requiredFields } from '@shared/utils';
 
 interface RequestInterface {
-  code: number;
+  email: string;
 }
 
-export const emailVerificationValidator = (
+export const sendEmailVerificationCodeValidator = (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const { code } = req.body as RequestInterface;
+  const { email } = req.body as RequestInterface;
 
   requiredFields<RequestInterface>({
-    code,
+    email,
   });
 
-  mustBe({ value: code, type: 'number' });
+  mustBe({ value: email, type: 'string' });
 
   next();
 };

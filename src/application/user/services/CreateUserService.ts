@@ -1,4 +1,4 @@
-import { sendEmailVerificationService } from '@application/auth/services';
+import { sendEmailVerificationCodeService } from '@application/auth/services';
 
 import { AlreadyExistError, BadRequestError } from '@shared/errors';
 import { User } from '@shared/types';
@@ -50,7 +50,6 @@ class CreateUserService {
       address,
       formation,
       account_type: 'user',
-      code: null,
       active: true,
       verified: false,
       password: crypter.hash(password),
@@ -58,7 +57,7 @@ class CreateUserService {
 
     const user = await usersRepository.create(data);
 
-    sendEmailVerificationService.execute({ email });
+    sendEmailVerificationCodeService.execute({ email });
 
     return user;
   }

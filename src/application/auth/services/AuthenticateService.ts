@@ -11,13 +11,13 @@ import {
 
 import { Crypter, Token } from '@libs';
 
-interface RequestInterface {
+interface ServiceInterface {
   email: string;
   password: string;
 }
 
 class AuthenticateService {
-  public async execute({ email, password }: RequestInterface) {
+  public async execute({ email, password }: ServiceInterface) {
     if (isEmpty(email) || isEmpty(password)) {
       throw new BadRequestError('email or password are empty');
     }

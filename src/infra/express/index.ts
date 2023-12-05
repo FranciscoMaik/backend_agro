@@ -8,6 +8,8 @@ import { ExpressServerInterface } from '@infra/types';
 import { errorMiddleware } from './middlewares';
 import { appRoutes } from './routes';
 
+console.log();
+
 export class ExpressServer implements ExpressServerInterface {
   private express: Express;
   private port: number;

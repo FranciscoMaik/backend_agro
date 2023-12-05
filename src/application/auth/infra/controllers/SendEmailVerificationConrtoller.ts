@@ -1,20 +1,20 @@
 import { Request, Response } from 'express';
 
-import { sendEmailVerificationService } from '@application/auth/services';
+import { sendEmailVerificationCodeService } from '@application/auth/services';
 
 interface RequestInterface {
   email: string;
 }
 
-class SendEmailVerificationController {
+class SendEmailVerificationCodeController {
   async handle(req: Request, res: Response) {
     const { email } = req.body as RequestInterface;
 
-    await sendEmailVerificationService.execute({ email });
+    await sendEmailVerificationCodeService.execute({ email });
 
     res.status(201).send();
   }
 }
 
-export const sendEmailVerificationController =
-  new SendEmailVerificationController();
+export const sendEmailVerificationCodeController =
+  new SendEmailVerificationCodeController();

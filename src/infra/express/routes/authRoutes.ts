@@ -2,16 +2,18 @@ import { Router } from 'express';
 
 import {
   authenticateController,
-  sendEmailVerificationController,
-  emailVerificationController,
+  sendEmailVerificationCodeController,
+  sendForgotPasswordCodeController,
+  verifyEmailVerificationCodeController,
+  verifyForgotPasswordCodeController,
 } from '@application/auth/infra/controllers';
 import {
   authenticateValidator,
-  sendEmailVerificationValidator,
-  emailVerificationValidator,
+  sendEmailVerificationCodeValidator,
+  sendForgotPasswordCodeValidator,
+  verifyEmailVerificationCodeValidator,
+  verifyForgotPasswordCodeValidator,
 } from '@application/auth/infra/validators';
-
-import { authMiddleware } from '../middlewares';
 
 const authRoutes = Router();
 
@@ -19,15 +21,26 @@ authRoutes.post('/', authenticateValidator, authenticateController.handle);
 
 authRoutes.post(
   '/verification',
-  sendEmailVerificationValidator,
-  sendEmailVerificationController.handle,
+  sendEmailVerificationCodeValidator,
+  sendEmailVerificationCodeController.handle,
 );
 
 authRoutes.patch(
   '/verification',
-  authMiddleware,
-  emailVerificationValidator,
-  emailVerificationController.handle,
+  verifyEmailVerificationCodeValidator,
+  verifyEmailVerificationCodeController.handle,
+);
+
+authRoutes.post(
+  '/forgot',
+  sendForgotPasswordCodeValidator,
+  sendForgotPasswordCodeController.handle,
+);
+
+authRoutes.patch(
+  '/forgot',
+  verifyForgotPasswordCodeValidator,
+  verifyForgotPasswordCodeController.handle,
 );
 
 export { authRoutes };

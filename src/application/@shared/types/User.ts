@@ -6,9 +6,8 @@ export interface User {
   cpf: string;
   address?: string | null;
   formation: string;
-  account_type: string;
+  account_type: 'user' | 'adm';
   active: boolean;
-  code: number | null;
   verified: boolean;
   createdAt: Date;
   updatedAt: Date;

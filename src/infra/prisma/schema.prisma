@@ -7,21 +7,31 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserAccountType {
+  user
+  adm
+}
+
+enum OtpType {
+  forgot
+  email
+}
+
 model User {
-  id           String   @id @default(uuid())
-  name         String   @db.VarChar(255)
-  email        String   @unique @db.VarChar(255)
-  password     String   @db.VarChar(255)
-  cpf          String   @db.Char(11)
-  address      String?  @db.VarChar(255)
-  formation    String   @db.VarChar(255)
-  account_type String   @db.VarChar(255)
-  active       Boolean  @default(true)
-  code         Int?
-  verified     Boolean  @default(false)
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  id           String          @id @default(uuid())
+  name         String          @db.VarChar(255)
+  email        String          @unique @db.VarChar(255)
+  password     String          @db.VarChar(255)
+  cpf          String          @db.Char(11)
+  address      String?         @db.VarChar(255)
+  formation    String          @db.VarChar(255)
+  account_type UserAccountType @default(user)
+  active       Boolean         @default(true)
+  verified     Boolean         @default(false)
+  createdAt    DateTime        @default(now())
+  updatedAt    DateTime        @updatedAt
   Farmer       Farmer[]
+  Otp          Otp[]
 
   @@map("users")
 }
@@ -45,4 +55,17 @@ model Farmer {
   user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
 
   @@map("farmers")
+}
+
+model Otp {
+  id         String   @id @default(uuid())
+  user_email String   @db.VarChar(255)
+  otp        String
+  type       OtpType
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+
+  user User @relation(fields: [user_email], references: [email], onDelete: Cascade)
+
+  @@map("otps")
 }
