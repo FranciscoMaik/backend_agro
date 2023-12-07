@@ -1,6 +1,5 @@
-import { NotFoundError } from '@shared/errors';
-
 import farmersRepository from '../infra/repositories/FarmersRepository';
+import { getFarmerService } from './GetFarmerService';
 
 interface ServiceInterface {
   id: string;
@@ -8,13 +7,8 @@ interface ServiceInterface {
 
 class DeleteFarmerService {
   async execute({ id }: ServiceInterface) {
-    const farmer = await farmersRepository.findById(id);
-
-    if (!farmer) {
-      throw new NotFoundError('farmer not found');
-    }
-
-    await farmersRepository.delete(id);
+    const farmer = await getFarmerService.execute({ id });
+    await farmersRepository.delete(farmer.id);
   }
 }
 

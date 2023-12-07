@@ -7,8 +7,8 @@ interface ServiceInterface {
 
 class DeleteUserService {
   public async execute({ id }: ServiceInterface) {
-    await getUserService.execute({ id });
-    await usersRepository.delete(id);
+    const user = await getUserService.execute({ id });
+    await usersRepository.delete(user.id);
   }
 }
 

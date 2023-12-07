@@ -1,6 +1,6 @@
 import { BadRequestError } from '@shared/errors';
 
-type Type = 'string' | 'number' | 'object';
+type Type = 'string' | 'number' | 'object' | 'boolean';
 
 interface Field {
   [key: string]: unknown;
