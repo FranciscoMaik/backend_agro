@@ -1,5 +1,7 @@
+import { User } from '@application/@shared/types/entities';
+import { Update } from '@application/@shared/types/helpers';
+
 import { UnauthorizedError } from '@shared/errors';
-import { User } from '@shared/types';
 
 import { Crypter } from '@libs';
 
@@ -24,8 +26,16 @@ class UpdatePasswordService {
       throw new UnauthorizedError('password is wrong');
     }
 
-    const data: User = {
-      ...user,
+    const data: Update<User> = {
+      id: user.id,
+      email: user.email,
+      name: user.name,
+      cpf: user.cpf,
+      formation: user.formation,
+      address: user.address,
+      account_type: user.account_type,
+      active: user.active,
+      verified: user.verified,
       password: crypter.hash(newPassword),
     };
 

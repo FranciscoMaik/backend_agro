@@ -1,6 +1,6 @@
 import { NotFoundError } from '@infra/express/errors';
 
-import { Otp } from '@application/@shared/types';
+import { Otp } from '@application/@shared/types/entities';
 import { addMinutes } from '@application/@shared/utils';
 import { usersRepository } from '@application/user/infra/repositories';
 

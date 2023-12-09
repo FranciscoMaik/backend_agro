@@ -1,6 +1,7 @@
 import { prisma } from '@infra/database';
 
-import { ServiceOrder } from '@application/@shared/types';
+import { ServiceOrder } from '@application/@shared/types/entities';
+import { Create, Update } from '@application/@shared/types/helpers';
 
 class ServiceOrdersRepository {
   async findAll(farmer_id: string, active: boolean) {
@@ -18,12 +19,12 @@ class ServiceOrdersRepository {
     return serviceOrder;
   }
 
-  async create(data: Omit<ServiceOrder, 'id' | 'createdAt' | 'updatedAt'>) {
+  async create(data: Create<ServiceOrder>) {
     const serviceOrder = await prisma.serviceOrder.create({ data });
     return serviceOrder;
   }
 
-  async update(data: ServiceOrder) {
+  async update(data: Update<ServiceOrder>) {
     const serviceOrder = await prisma.serviceOrder.update({
       data,
       where: { farmer_id: data.farmer_id, id: data.id },

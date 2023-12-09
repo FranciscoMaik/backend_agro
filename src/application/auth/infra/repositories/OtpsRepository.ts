@@ -1,6 +1,6 @@
 import { prisma } from '@infra/database';
 
-import { Otp } from '@application/@shared/types';
+import { Otp } from '@application/@shared/types/entities';
 
 class OtpsRepository {
   async findByUserEmailAndType(user_email: string, type: Otp['type']) {

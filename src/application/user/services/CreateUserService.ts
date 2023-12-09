@@ -1,7 +1,7 @@
+import { User } from '@application/@shared/types/entities';
 import { sendEmailVerificationCodeService } from '@application/auth/services';
 
 import { AlreadyExistError, BadRequestError } from '@shared/errors';
-import { User } from '@shared/types';
 
 import { Crypter } from '@libs';
 

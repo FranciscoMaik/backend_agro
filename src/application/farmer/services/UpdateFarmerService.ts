@@ -1,11 +1,10 @@
-import {
-  AlreadyExistError,
-  BadRequestError,
-  NotFoundError,
-} from '@shared/errors';
-import { Farmer } from '@shared/types';
+import { Farmer } from '@application/@shared/types/entities';
+import { Update } from '@application/@shared/types/helpers';
+
+import { AlreadyExistError, BadRequestError } from '@shared/errors';
 
 import farmersRepository from '../infra/repositories/FarmersRepository';
+import { getFarmerService } from './GetFarmerService';
 
 interface ServiceInterface {
   id: string;
@@ -41,11 +40,7 @@ class UpdateFarmerService {
       throw new BadRequestError('phone must have 13 characters');
     }
 
-    const farmer = await farmersRepository.findById(id);
-
-    if (!farmer) {
-      throw new NotFoundError('farmer not found');
-    }
+    const farmer = await getFarmerService.execute({ id });
 
     const isCpfChanged = farmer.cpf !== cpf;
     const isPhoneChanged = farmer.phone !== phone;
@@ -66,7 +61,7 @@ class UpdateFarmerService {
       }
     }
 
-    const data: Farmer = {
+    const data: Update<Farmer> = {
       id,
       name,
       nickname,
@@ -79,8 +74,6 @@ class UpdateFarmerService {
       marital_status,
       active: farmer.active,
       user_id: farmer.user_id,
-      updatedAt: farmer.updatedAt,
-      createdAt: farmer.createdAt,
     };
 
     const updatedFarmer = await farmersRepository.update(data);

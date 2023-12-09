@@ -1,6 +1,7 @@
 import { prisma } from '@infra/database';
 
-import { Farmer } from '@shared/types';
+import { Farmer } from '@application/@shared/types/entities';
+import { Create, Update } from '@application/@shared/types/helpers';
 
 class FarmersRepository {
   async findAll(user_id: string) {
@@ -23,12 +24,12 @@ class FarmersRepository {
     return farmer;
   }
 
-  async create(data: Omit<Farmer, 'id' | 'createdAt' | 'updatedAt'>) {
+  async create(data: Create<Farmer>) {
     const farmer = await prisma.farmer.create({ data });
     return farmer;
   }
 
-  async update(data: Farmer) {
+  async update(data: Update<Farmer>) {
     const farmer = await prisma.farmer.update({ data, where: { id: data.id } });
     return farmer;
   }

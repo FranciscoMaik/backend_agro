@@ -1,6 +1,7 @@
 import { BadRequestError } from '@infra/express/errors';
 
-import { ServiceOrder } from '@application/@shared/types';
+import { ServiceOrder } from '@application/@shared/types/entities';
+import { Create } from '@application/@shared/types/helpers';
 import { getFarmerService } from '@application/farmer/services';
 import { getUserService } from '@application/user/services';
 
@@ -31,7 +32,7 @@ class CreateServiceOrderService {
       throw new BadRequestError('start_date mus be greater then end_date');
     }
 
-    const data: Omit<ServiceOrder, 'id' | 'createdAt' | 'updatedAt'> = {
+    const data: Create<ServiceOrder> = {
       name,
       address,
       start_date,

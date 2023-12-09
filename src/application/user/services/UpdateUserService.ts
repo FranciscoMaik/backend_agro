@@ -1,5 +1,7 @@
+import { User } from '@application/@shared/types/entities';
+import { Update } from '@application/@shared/types/helpers';
+
 import { AlreadyExistError, BadRequestError } from '@shared/errors';
-import { User } from '@shared/types';
 
 import { usersRepository } from '../infra/repositories';
 import { getUserService } from './GetUserService';
@@ -47,7 +49,7 @@ class UpdateUserService {
       }
     }
 
-    const data: User = {
+    const data: Update<User> = {
       id,
       email,
       cpf,
@@ -58,8 +60,6 @@ class UpdateUserService {
       account_type: user.account_type,
       active: user.active,
       verified: isEmailChanged ? false : user.verified,
-      createdAt: user.createdAt,
-      updatedAt: user.updatedAt,
     };
 
     const updatedUser = await usersRepository.update(data);

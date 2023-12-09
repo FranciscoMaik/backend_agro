@@ -1,5 +1,7 @@
+import { Farmer } from '@application/@shared/types/entities';
+import { Create } from '@application/@shared/types/helpers';
+
 import { AlreadyExistError, BadRequestError } from '@shared/errors';
-import { Farmer } from '@shared/types';
 
 import farmersRepository from '../infra/repositories/FarmersRepository';
 
@@ -49,7 +51,7 @@ class CreateFarmerService {
       throw new AlreadyExistError('this phone already exists');
     }
 
-    const data: Omit<Farmer, 'id' | 'createdAt' | 'updatedAt'> = {
+    const data: Create<Farmer> = {
       name,
       nickname,
       address,

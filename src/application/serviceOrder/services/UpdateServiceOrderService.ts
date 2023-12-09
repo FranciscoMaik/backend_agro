@@ -1,6 +1,7 @@
 import { BadRequestError } from '@infra/express/errors';
 
-import { ServiceOrder } from '@application/@shared/types';
+import { ServiceOrder } from '@application/@shared/types/entities';
+import { Update } from '@application/@shared/types/helpers';
 
 import { serviceOrdersRepository } from '../infra/repositories/ServiceOrdersRepository';
 import { getServiceOrderService } from './GetServiceOrderService';
@@ -31,7 +32,7 @@ class UpdateServiceOrderService {
       throw new BadRequestError('start_date mus be greater then end_date');
     }
 
-    const data: ServiceOrder = {
+    const data: Update<ServiceOrder> = {
       id,
       name,
       address,
@@ -40,8 +41,6 @@ class UpdateServiceOrderService {
       active,
       farmer_id: serviceOrder.farmer_id,
       user_id: serviceOrder.user_id,
-      createdAt: serviceOrder.createdAt,
-      updatedAt: serviceOrder.updatedAt,
     };
 
     const updatedServiceOrder = await serviceOrdersRepository.update(data);
