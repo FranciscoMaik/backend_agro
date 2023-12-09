@@ -11,7 +11,8 @@ interface RequestInterface {
 
 class CreateServiceOrderController {
   async handle(req: Request, res: Response) {
-    const { userId, farmerId } = req.params;
+    const { farmerId } = req.params;
+    const userId = req.userId;
     const data = req.body as RequestInterface;
 
     const serviceOrder = await createServiceOrderService.execute({

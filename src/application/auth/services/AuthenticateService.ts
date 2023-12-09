@@ -1,13 +1,8 @@
 import { userTokenExpiration } from 'utils/constants';
-import { isEmpty } from 'utils/validators';
 
 import { usersRepository } from '@application/user/infra/repositories';
 
-import {
-  BadRequestError,
-  NotFoundError,
-  UnauthorizedError,
-} from '@shared/errors';
+import { NotFoundError, UnauthorizedError } from '@shared/errors';
 
 import { Crypter, Token } from '@libs';
 
@@ -18,10 +13,6 @@ interface ServiceInterface {
 
 class AuthenticateService {
   public async execute({ email, password }: ServiceInterface) {
-    if (isEmpty(email) || isEmpty(password)) {
-      throw new BadRequestError('email or password are empty');
-    }
-
     const user = await usersRepository.findByEmail(email);
 
     if (!user) {

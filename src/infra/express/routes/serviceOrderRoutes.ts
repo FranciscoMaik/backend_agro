@@ -12,19 +12,19 @@ import { updateValidator } from '@application/serviceOrder/infra/validators/upda
 
 import { authMiddleware } from '../middlewares';
 
-const serviceOrderRouter = Router();
+const serviceOrderRouter = Router({ mergeParams: true });
 
 serviceOrderRouter.use(authMiddleware);
-
-serviceOrderRouter.get('/', getServiceOrderController.handle);
-
-serviceOrderRouter.get('/:id', getAllServiceOrdersController.handle);
 
 serviceOrderRouter.post(
   '/',
   createValidator,
   createServiceOrderController.handle,
 );
+
+serviceOrderRouter.get('/', getAllServiceOrdersController.handle);
+
+serviceOrderRouter.get('/:id', getServiceOrderController.handle);
 
 serviceOrderRouter.put(
   '/:id',

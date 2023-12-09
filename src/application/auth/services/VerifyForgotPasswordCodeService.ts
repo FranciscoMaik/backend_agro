@@ -2,6 +2,8 @@ import { NotFoundError } from '@infra/express/errors';
 
 import { usersRepository } from '@application/user/infra/repositories';
 
+import { Crypter } from '@libs';
+
 import { verifyOtpService } from './VerifyOtpService';
 
 interface ServiceInterface {
@@ -18,13 +20,18 @@ class VerifyForgotPasswordCodeService {
       throw new NotFoundError('user not found');
     }
 
+    const crypter = new Crypter();
+
     await verifyOtpService.execute({
       code,
       email,
       type: 'forgot',
     });
 
-    await usersRepository.update({ ...user, password: newPassword });
+    await usersRepository.update({
+      ...user,
+      password: crypter.hash(newPassword),
+    });
   }
 }
 

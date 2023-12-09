@@ -22,7 +22,7 @@ model User {
   name         String          @db.VarChar(255)
   email        String          @unique @db.VarChar(255)
   password     String          @db.VarChar(255)
-  cpf          String          @db.Char(11)
+  cpf          String          @unique @db.Char(11)
   address      String?         @db.VarChar(255)
   formation    String          @db.VarChar(255)
   account_type UserAccountType @default(user)

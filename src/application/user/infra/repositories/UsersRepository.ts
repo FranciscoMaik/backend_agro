@@ -4,17 +4,17 @@ import { User } from '@shared/types';
 
 class UsersRepository {
   async findById(id: string) {
-    const user = await prisma.user.findFirst({ where: { id } });
+    const user = await prisma.user.findUnique({ where: { id } });
     return user;
   }
 
   async findByEmail(email: string) {
-    const user = await prisma.user.findFirst({ where: { email } });
+    const user = await prisma.user.findUnique({ where: { email } });
     return user;
   }
 
   async findByCpf(cpf: string) {
-    const user = await prisma.user.findFirst({ where: { cpf } });
+    const user = await prisma.user.findUnique({ where: { cpf } });
     return user;
   }
 

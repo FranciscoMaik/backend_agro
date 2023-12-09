@@ -13,7 +13,7 @@ class GetAllServiceOrdersController {
 
     const serviceOrders = await getAllServiceOrdersService.execute({
       farmerId,
-      active: Boolean(active) ?? true,
+      active: active === 'false' ? false : true,
     });
 
     res.status(200).json({ serviceOrders });
