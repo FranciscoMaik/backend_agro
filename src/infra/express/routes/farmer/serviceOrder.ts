@@ -10,28 +10,24 @@ import {
 import { createValidator } from '@application/serviceOrder/infra/validators/createValidator';
 import { updateValidator } from '@application/serviceOrder/infra/validators/updateValidator';
 
-import { authMiddleware } from '../middlewares';
+const serviceOrderRoutes = Router({ mergeParams: true });
 
-const serviceOrderRouter = Router({ mergeParams: true });
-
-serviceOrderRouter.use(authMiddleware);
-
-serviceOrderRouter.post(
+serviceOrderRoutes.post(
   '/',
   createValidator,
   createServiceOrderController.handle,
 );
 
-serviceOrderRouter.get('/', getAllServiceOrdersController.handle);
+serviceOrderRoutes.get('/', getAllServiceOrdersController.handle);
 
-serviceOrderRouter.get('/:id', getServiceOrderController.handle);
+serviceOrderRoutes.get('/:id', getServiceOrderController.handle);
 
-serviceOrderRouter.put(
+serviceOrderRoutes.put(
   '/:id',
   updateValidator,
   updateServiceOrderController.handle,
 );
 
-serviceOrderRouter.delete('/:id', deleteServiceOrderController.handle);
+serviceOrderRoutes.delete('/:id', deleteServiceOrderController.handle);
 
-export { serviceOrderRouter };
+export { serviceOrderRoutes };

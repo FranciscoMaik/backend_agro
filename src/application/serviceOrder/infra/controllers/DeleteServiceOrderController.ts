@@ -4,9 +4,9 @@ import { deleteServiceOrderService } from '@application/serviceOrder/services';
 
 class DeleteServiceOrderController {
   async handle(req: Request, res: Response) {
-    const { id } = req.params;
+    const { id, farmerId } = req.params;
 
-    await deleteServiceOrderService.execute({ id });
+    await deleteServiceOrderService.execute({ id, farmerId });
 
     res.status(204).send();
   }

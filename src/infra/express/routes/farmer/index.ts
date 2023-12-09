@@ -13,7 +13,8 @@ import {
   updateValidator,
 } from '@application/farmer/infra/validators';
 
-import { authMiddleware } from '../middlewares';
+import { authMiddleware } from '../../middlewares';
+import { serviceOrderRoutes } from './serviceOrder';
 
 const farmerRoutes = Router();
 
@@ -30,5 +31,7 @@ farmerRoutes.put('/:id', updateValidator, updateFarmerController.handle);
 farmerRoutes.patch('/:id/soft-delete', softDeleteFarmerController.handle);
 
 farmerRoutes.delete('/:id', deleteFarmerController.handle);
+
+farmerRoutes.use('/:farmerId/service-orders', serviceOrderRoutes);
 
 export { farmerRoutes };

@@ -4,9 +4,9 @@ import { getServiceOrderService } from '@application/serviceOrder/services';
 
 class GetServiceOrderController {
   async handle(req: Request, res: Response) {
-    const { id } = req.params;
+    const { id, farmerId } = req.params;
 
-    const serviceOrder = await getServiceOrderService.execute({ id });
+    const serviceOrder = await getServiceOrderService.execute({ id, farmerId });
 
     res.status(200).json({ serviceOrder });
   }

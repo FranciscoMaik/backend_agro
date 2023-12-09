@@ -11,9 +11,9 @@ class ServiceOrdersRepository {
     return serviceOrders;
   }
 
-  async findById(id: string) {
+  async findById(id: string, farmer_id: string) {
     const serviceOrder = await prisma.serviceOrder.findUnique({
-      where: { id },
+      where: { farmer_id, id },
     });
     return serviceOrder;
   }
@@ -26,14 +26,14 @@ class ServiceOrdersRepository {
   async update(data: ServiceOrder) {
     const serviceOrder = await prisma.serviceOrder.update({
       data,
-      where: { id: data.id },
+      where: { farmer_id: data.farmer_id, id: data.id },
     });
 
     return serviceOrder;
   }
 
-  async delete(id: string) {
-    await prisma.serviceOrder.delete({ where: { id } });
+  async delete(id: string, farmer_id: string) {
+    await prisma.serviceOrder.delete({ where: { farmer_id, id } });
   }
 }
 
