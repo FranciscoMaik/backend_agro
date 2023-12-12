@@ -28,8 +28,8 @@ class CreateServiceOrderService {
     const user = await getUserService.execute({ id: userId });
     const farmer = await getFarmerService.execute({ id: farmerId });
 
-    if (start_date > end_date) {
-      throw new BadRequestError('start_date mus be greater then end_date');
+    if (new Date(start_date) >= new Date(end_date)) {
+      throw new BadRequestError('start_date must be greater then end_date');
     }
 
     const data: Create<ServiceOrder> = {

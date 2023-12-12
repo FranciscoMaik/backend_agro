@@ -91,3 +91,18 @@ model Otp {
 
   @@map("otps")
 }
+
+model Property {
+  id                String   @id @default(uuid())
+  name              String   @unique @db.VarChar(255)
+  hectares          Int
+  address           String   @db.VarChar(255)
+  exploration       String   @db.VarChar(255)
+  classification    String   @db.VarChar(255)
+  hydric_source     String   @db.VarChar(255)
+  electrical_source String   @db.VarChar(255)
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("properties")
+}
