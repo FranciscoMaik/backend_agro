@@ -1,8 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
+import { JsonWebTokenError } from 'jsonwebtoken';
 
 import { Token } from '@libs';
 
 import { UnauthorizedError } from '../errors';
+
+interface TokenError extends JsonWebTokenError {
+  name: 'TokenExpiredError' | 'JsonWebTokenError';
+}
 
 interface TokenPayload {
   id: string;
@@ -33,7 +38,16 @@ export const authMiddleware = (
     req.userId = id;
 
     return next();
-  } catch {
-    throw new UnauthorizedError('token is not valid');
+  } catch (err) {
+    const error = err as TokenError;
+
+    const messages = {
+      TokenExpiredError: 'token has expired',
+      JsonWebTokenError: 'token is not valid',
+    };
+
+    const errorMessage = messages[error.name] || error.message;
+
+    throw new UnauthorizedError(errorMessage);
   }
 };

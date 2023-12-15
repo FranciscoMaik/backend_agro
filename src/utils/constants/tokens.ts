@@ -1,1 +1,1 @@
-export const userTokenExpiration = '1d';
+export const userTokenExpiration = '30d';

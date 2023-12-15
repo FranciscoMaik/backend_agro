@@ -97,12 +97,27 @@ model Property {
   name              String   @unique @db.VarChar(255)
   hectares          Int
   address           String   @db.VarChar(255)
-  exploration       String   @db.VarChar(255)
   classification    String   @db.VarChar(255)
-  hydric_source     String   @db.VarChar(255)
+  hydric_source     String   @db.VarChar(
+  exploration       String   @db.VarChar(255)255)
   electrical_source String   @db.VarChar(255)
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
+  AgricuturalFamily AgricuturalFamily[]
+
   @@map("properties")
+}
+
+model AgricuturalFamily {
+  id             String   @id @default(uuid())
+  name           String   @unique @db.VarChar(255)
+  members_amount Int
+  property_id    String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  property Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+
+  @@map("agricuturalFamilys")
 }

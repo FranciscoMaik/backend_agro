@@ -14,6 +14,8 @@ import {
   updateValidator,
 } from '@application/property/infra/validators';
 
+import { agricuturalFamilyRoutes } from './AgricuturalFamily';
+
 const propertyRoutes = Router();
 
 propertyRoutes.use(authMiddleware);
@@ -27,5 +29,7 @@ propertyRoutes.get('/:id', getPropertyController.handle);
 propertyRoutes.put('/:id', updateValidator, updatePropertyController.handle);
 
 propertyRoutes.delete('/:id', deletePropertyController.handle);
+
+propertyRoutes.use('/:propertyId/agricutural-familys', agricuturalFamilyRoutes);
 
 export { propertyRoutes };

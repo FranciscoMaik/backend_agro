@@ -10,7 +10,7 @@ class DeleteServiceOrderService {
   async execute({ id, farmerId }: ServiceInterface) {
     const serviceOrder = await getServiceOrderService.execute({ id, farmerId });
 
-    serviceOrdersRepository.delete(serviceOrder.id, farmerId);
+    serviceOrdersRepository.delete(serviceOrder.id, serviceOrder.farmer_id);
   }
 }
 
