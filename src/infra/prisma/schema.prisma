@@ -104,8 +104,9 @@ model Property {
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
 
-  AgricuturalFamily AgricuturalFamily[]
-  LivestockActivity LivestockActivity[]
+  AgricuturalFamily   AgricuturalFamily[]
+  LivestockActivity   LivestockActivity[]
+  AgricuturalActivity AgricuturalActivity[]
 
   @@map("properties")
 }
@@ -141,4 +142,23 @@ model LivestockActivity {
   property Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
 
   @@map("livestockActivities")
+}
+
+model AgricuturalActivity {
+  id              String   @id @default(uuid())
+  name            String   @db.VarChar(255)
+  uses_irrigation Boolean
+  uses_pesticides Boolean
+  cultivation     String   @db.VarChar(255)
+  input           String   @db.VarChar(255)
+  hectares        Int
+  work_method     String   @db.VarChar(255)
+  used_equipament String   @db.VarChar(255)
+  property_id     String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  property Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+
+  @@map("agricuturalActivities")
 }

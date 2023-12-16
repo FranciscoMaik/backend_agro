@@ -12,27 +12,27 @@ import {
   updateValidator,
 } from '@application/livestockActivity/infra/validators';
 
-const LivestockActivityRoutes = Router({ mergeParams: true });
+const livestockActivityRoutes = Router({ mergeParams: true });
 
-LivestockActivityRoutes.post(
+livestockActivityRoutes.post(
   '/',
   createValidator,
   createLivestockActivityController.handle,
 );
 
-LivestockActivityRoutes.get('/', getAllLivestockActivitiesController.handle);
+livestockActivityRoutes.get('/', getAllLivestockActivitiesController.handle);
 
-LivestockActivityRoutes.get('/:id', getLivestockActivityController.handle);
+livestockActivityRoutes.get('/:id', getLivestockActivityController.handle);
 
-LivestockActivityRoutes.put(
+livestockActivityRoutes.put(
   '/:id',
   updateValidator,
   updateLivestockActivityController.handle,
 );
 
-LivestockActivityRoutes.delete(
+livestockActivityRoutes.delete(
   '/:id',
   deleteLivestockActivityController.handle,
 );
 
-export { LivestockActivityRoutes };
+export { livestockActivityRoutes };
