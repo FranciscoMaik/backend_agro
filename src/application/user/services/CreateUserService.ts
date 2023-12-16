@@ -1,4 +1,5 @@
 import { User } from '@application/@shared/types/entities';
+import { Create } from '@application/@shared/types/helpers';
 import { sendEmailVerificationCodeService } from '@application/auth/services';
 
 import { AlreadyExistError, BadRequestError } from '@shared/errors';
@@ -43,7 +44,7 @@ class CreateUserService {
 
     const crypter = new Crypter();
 
-    const data: Omit<User, 'id' | 'createdAt' | 'updatedAt'> = {
+    const data: Create<User> = {
       email,
       name,
       cpf,
