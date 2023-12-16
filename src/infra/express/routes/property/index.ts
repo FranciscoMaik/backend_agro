@@ -15,6 +15,7 @@ import {
 } from '@application/property/infra/validators';
 
 import { agricuturalFamilyRoutes } from './AgricuturalFamily';
+import { LivestockActivityRoutes } from './LivestockActivity';
 
 const propertyRoutes = Router();
 
@@ -31,5 +32,10 @@ propertyRoutes.put('/:id', updateValidator, updatePropertyController.handle);
 propertyRoutes.delete('/:id', deletePropertyController.handle);
 
 propertyRoutes.use('/:propertyId/agricutural-familys', agricuturalFamilyRoutes);
+
+propertyRoutes.use(
+  '/:propertyId/livestock-activities',
+  LivestockActivityRoutes,
+);
 
 export { propertyRoutes };

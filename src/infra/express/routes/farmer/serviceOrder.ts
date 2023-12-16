@@ -7,8 +7,10 @@ import {
   getServiceOrderController,
   updateServiceOrderController,
 } from '@application/serviceOrder/infra/controllers';
-import { createValidator } from '@application/serviceOrder/infra/validators/createValidator';
-import { updateValidator } from '@application/serviceOrder/infra/validators/updateValidator';
+import {
+  createValidator,
+  updateValidator,
+} from '@application/serviceOrder/infra/validators';
 
 const serviceOrderRoutes = Router({ mergeParams: true });
 
