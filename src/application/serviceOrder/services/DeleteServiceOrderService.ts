@@ -4,11 +4,18 @@ import { getServiceOrderService } from './GetServiceOrderService';
 interface ServiceInterface {
   id: string;
   farmerId: string;
+  familyId: string;
+  propertyId: string;
 }
 
 class DeleteServiceOrderService {
-  async execute({ id, farmerId }: ServiceInterface) {
-    const serviceOrder = await getServiceOrderService.execute({ id, farmerId });
+  async execute({ id, farmerId, familyId, propertyId }: ServiceInterface) {
+    const serviceOrder = await getServiceOrderService.execute({
+      id,
+      farmerId,
+      familyId,
+      propertyId,
+    });
 
     serviceOrdersRepository.delete(serviceOrder.id, serviceOrder.farmer_id);
   }

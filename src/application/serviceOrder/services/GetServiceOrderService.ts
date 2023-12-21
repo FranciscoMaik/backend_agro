@@ -7,11 +7,17 @@ import { serviceOrdersRepository } from '../infra/repositories/ServiceOrdersRepo
 interface ServiceInterface {
   id: string;
   farmerId: string;
+  familyId: string;
+  propertyId: string;
 }
 
 class GetServiceOrderService {
-  async execute({ id, farmerId }: ServiceInterface) {
-    const farmer = await getFarmerService.execute({ id: farmerId });
+  async execute({ id, farmerId, familyId, propertyId }: ServiceInterface) {
+    const farmer = await getFarmerService.execute({
+      id: farmerId,
+      familyId,
+      propertyId,
+    });
 
     const serviceOrder = await serviceOrdersRepository.findById(id, farmer.id);
 

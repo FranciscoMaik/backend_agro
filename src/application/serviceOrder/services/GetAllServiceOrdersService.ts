@@ -3,13 +3,19 @@ import { getFarmerService } from '@application/farmer/services';
 import { serviceOrdersRepository } from '../infra/repositories/ServiceOrdersRepository';
 
 interface ServiceInterface {
-  farmerId: string;
   active: boolean;
+  farmerId: string;
+  familyId: string;
+  propertyId: string;
 }
 
 class GetAllServiceOrdersService {
-  async execute({ farmerId, active }: ServiceInterface) {
-    const farmer = await getFarmerService.execute({ id: farmerId });
+  async execute({ active, farmerId, familyId, propertyId }: ServiceInterface) {
+    const farmer = await getFarmerService.execute({
+      id: farmerId,
+      familyId,
+      propertyId,
+    });
 
     const serviceOrders = await serviceOrdersRepository.findAll(
       farmer.id,

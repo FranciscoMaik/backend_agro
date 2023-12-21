@@ -17,9 +17,13 @@ interface RequestInterface {
 class CreateFarmerController {
   async handle(req: Request, res: Response) {
     const data = req.body as RequestInterface;
-    const userId = req.userId;
+    const { familyId, propertyId } = req.params;
 
-    const farmer = await createFarmerService.execute({ ...data, userId });
+    const farmer = await createFarmerService.execute({
+      ...data,
+      familyId,
+      propertyId,
+    });
 
     res.status(201).json({ farmer });
   }

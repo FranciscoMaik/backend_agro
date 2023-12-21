@@ -4,9 +4,12 @@ import { getAllFarmersService } from '@application/farmer/services';
 
 class GetAllFarmersController {
   async handle(req: Request, res: Response) {
-    const userId = req.userId;
+    const { propertyId, familyId } = req.params;
 
-    const farmers = await getAllFarmersService.execute({ userId });
+    const farmers = await getAllFarmersService.execute({
+      propertyId,
+      familyId,
+    });
 
     res.status(200).json({ farmers });
   }

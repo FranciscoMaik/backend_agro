@@ -12,6 +12,8 @@ import {
   updateValidator,
 } from '@application/agricuturalFamily/infra/validators';
 
+import { farmerRoutes } from './farmer';
+
 const agricuturalFamilyRoutes = Router({ mergeParams: true });
 
 agricuturalFamilyRoutes.post(
@@ -34,5 +36,7 @@ agricuturalFamilyRoutes.delete(
   '/:id',
   deleteAgricuturalFamilyController.handle,
 );
+
+agricuturalFamilyRoutes.use('/:familyId/farmers', farmerRoutes);
 
 export { agricuturalFamilyRoutes };

@@ -10,7 +10,7 @@ export interface Farmer {
   credit_line: string;
   course: string;
   active: boolean;
-  user_id: string;
+  family_id: string;
   createdAt: Date;
   updatedAt: Date;
 }

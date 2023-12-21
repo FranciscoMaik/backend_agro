@@ -17,9 +17,14 @@ interface RequestInterface {
 export class UpdateFarmerController {
   async handle(req: Request, res: Response) {
     const data = req.body as RequestInterface;
-    const { id } = req.params;
+    const { id, propertyId, familyId } = req.params;
 
-    const farmer = await updateFarmerService.execute({ ...data, id });
+    const farmer = await updateFarmerService.execute({
+      ...data,
+      id,
+      propertyId,
+      familyId,
+    });
 
     res.status(200).json({ farmer });
   }

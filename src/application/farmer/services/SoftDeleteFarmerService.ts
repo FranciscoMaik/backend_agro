@@ -6,11 +6,13 @@ import { getFarmerService } from './GetFarmerService';
 
 interface ServiceInterface {
   id: string;
+  propertyId: string;
+  familyId: string;
 }
 
 class SoftDeleteFarmerService {
-  async execute({ id }: ServiceInterface) {
-    const farmer = await getFarmerService.execute({ id });
+  async execute({ id, propertyId, familyId }: ServiceInterface) {
+    const farmer = await getFarmerService.execute({ id, propertyId, familyId });
 
     const data: Update<Farmer> = {
       id: farmer.id,
@@ -23,7 +25,7 @@ class SoftDeleteFarmerService {
       course: farmer.course,
       credit_line: farmer.credit_line,
       marital_status: farmer.marital_status,
-      user_id: farmer.user_id,
+      family_id: farmer.family_id,
       active: false,
     };
 

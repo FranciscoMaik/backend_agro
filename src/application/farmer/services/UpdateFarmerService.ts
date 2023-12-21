@@ -17,6 +17,8 @@ interface ServiceInterface {
   marital_status: string;
   credit_line: string;
   course: string;
+  propertyId: string;
+  familyId: string;
 }
 
 class UpdateFarmerService {
@@ -31,6 +33,8 @@ class UpdateFarmerService {
     course,
     credit_line,
     marital_status,
+    propertyId,
+    familyId,
   }: ServiceInterface) {
     if (cpf.length !== 11) {
       throw new BadRequestError('cpf must have 11 characters');
@@ -40,7 +44,7 @@ class UpdateFarmerService {
       throw new BadRequestError('phone must have 13 characters');
     }
 
-    const farmer = await getFarmerService.execute({ id });
+    const farmer = await getFarmerService.execute({ id, propertyId, familyId });
 
     const isCpfChanged = farmer.cpf !== cpf;
     const isPhoneChanged = farmer.phone !== phone;
@@ -73,7 +77,7 @@ class UpdateFarmerService {
       credit_line,
       marital_status,
       active: farmer.active,
-      user_id: farmer.user_id,
+      family_id: farmer.family_id,
     };
 
     const updatedFarmer = await farmersRepository.update(data);

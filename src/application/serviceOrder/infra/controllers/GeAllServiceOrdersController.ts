@@ -8,11 +8,13 @@ interface Query {
 
 class GetAllServiceOrdersController {
   async handle(req: Request, res: Response) {
-    const { farmerId } = req.params;
+    const { farmerId, familyId, propertyId } = req.params;
     const { active } = req.query as unknown as Query;
 
     const serviceOrders = await getAllServiceOrdersService.execute({
       farmerId,
+      familyId,
+      propertyId,
       active: active === 'false' ? false : true,
     });
 

@@ -6,7 +6,6 @@ export interface ServiceOrder {
   end_date: Date;
   active: boolean;
   farmer_id: string;
-  user_id: string;
   createdAt: Date;
   updatedAt: Date;
 }

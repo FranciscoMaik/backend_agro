@@ -11,14 +11,14 @@ interface RequestInterface {
 
 class CreateServiceOrderController {
   async handle(req: Request, res: Response) {
-    const { farmerId } = req.params;
-    const userId = req.userId;
+    const { farmerId, familyId, propertyId } = req.params;
     const data = req.body as RequestInterface;
 
     const serviceOrder = await createServiceOrderService.execute({
       ...data,
-      userId,
       farmerId,
+      familyId,
+      propertyId,
     });
 
     res.status(201).json({ serviceOrder });

@@ -13,12 +13,9 @@ import {
   updateValidator,
 } from '@application/farmer/infra/validators';
 
-import { authMiddleware } from '../../middlewares';
 import { serviceOrderRoutes } from './serviceOrder';
 
-const farmerRoutes = Router();
-
-farmerRoutes.use(authMiddleware);
+const farmerRoutes = Router({ mergeParams: true });
 
 farmerRoutes.post('/', createValidator, createFarmerController.handle);
 

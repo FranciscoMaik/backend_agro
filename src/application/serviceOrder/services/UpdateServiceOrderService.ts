@@ -14,6 +14,8 @@ interface ServiceInterface {
   end_date: Date;
   active: boolean;
   farmerId: string;
+  familyId: string;
+  propertyId: string;
 }
 
 class UpdateServiceOrderService {
@@ -25,8 +27,15 @@ class UpdateServiceOrderService {
     end_date,
     active,
     farmerId,
+    familyId,
+    propertyId,
   }: ServiceInterface) {
-    const serviceOrder = await getServiceOrderService.execute({ id, farmerId });
+    const serviceOrder = await getServiceOrderService.execute({
+      id,
+      farmerId,
+      familyId,
+      propertyId,
+    });
 
     if (start_date > end_date) {
       throw new BadRequestError('start_date mus be greater then end_date');
@@ -40,7 +49,6 @@ class UpdateServiceOrderService {
       end_date,
       active,
       farmer_id: serviceOrder.farmer_id,
-      user_id: serviceOrder.user_id,
     };
 
     const updatedServiceOrder = await serviceOrdersRepository.update(data);

@@ -17,6 +17,19 @@ enum OtpType {
   email
 }
 
+model Otp {
+  id         String   @id @default(uuid())
+  user_email String   @db.VarChar(255)
+  otp        String
+  type       OtpType
+  createdAt  DateTime @default(now())
+  expiresAt  DateTime
+
+  user User @relation(fields: [user_email], references: [email], onDelete: Cascade)
+
+  @@map("otps")
+}
+
 model User {
   id           String          @id @default(uuid())
   name         String          @db.VarChar(255)
@@ -31,65 +44,9 @@ model User {
   createdAt    DateTime        @default(now())
   updatedAt    DateTime        @updatedAt
 
-  Farmer       Farmer[]
-  Otp          Otp[]
-  ServiceOrder ServiceOrder[]
+  Otp Otp[]
 
   @@map("users")
-}
-
-model Farmer {
-  id             String   @id @default(uuid())
-  name           String   @db.VarChar(255)
-  nickname       String   @db.VarChar(255)
-  gender         String   @db.VarChar(255)
-  phone          String   @unique @db.Char(13)
-  cpf            String   @unique @db.Char(11)
-  address        String   @db.VarChar(255)
-  marital_status String   @db.VarChar(255)
-  credit_line    String   @db.VarChar(255)
-  course         String   @db.VarChar(255)
-  active         Boolean  @default(true)
-  user_id        String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  ServiceOrder ServiceOrder[]
-
-  user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  @@map("farmers")
-}
-
-model ServiceOrder {
-  id         String   @id @default(uuid())
-  name       String   @db.VarChar(255)
-  address    String   @db.VarChar(255)
-  start_date DateTime
-  end_date   DateTime
-  active     Boolean
-  farmer_id  String
-  user_id    String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  farmer Farmer @relation(fields: [farmer_id], references: [id], onDelete: Cascade)
-  user   User   @relation(fields: [user_id], references: [id], onDelete: Cascade)
-
-  @@map("serviceOrders")
-}
-
-model Otp {
-  id         String   @id @default(uuid())
-  user_email String   @db.VarChar(255)
-  otp        String
-  type       OtpType
-  createdAt  DateTime @default(now())
-  expiresAt  DateTime
-
-  user User @relation(fields: [user_email], references: [email], onDelete: Cascade)
-
-  @@map("otps")
 }
 
 model Property {
@@ -109,19 +66,6 @@ model Property {
   AgricuturalActivity AgricuturalActivity[]
 
   @@map("properties")
-}
-
-model AgricuturalFamily {
-  id             String   @id @default(uuid())
-  name           String   @unique @db.VarChar(255)
-  members_amount Int
-  property_id    String
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-
-  property Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
-
-  @@map("agricuturalFamilys")
 }
 
 model LivestockActivity {
@@ -161,4 +105,58 @@ model AgricuturalActivity {
   property Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
 
   @@map("agricuturalActivities")
+}
+
+model AgricuturalFamily {
+  id             String   @id @default(uuid())
+  name           String   @unique @db.VarChar(255)
+  members_amount Int
+  property_id    String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  Farmer Farmer[]
+
+  property Property @relation(fields: [property_id], references: [id], onDelete: Cascade)
+
+  @@map("agricuturalFamilys")
+}
+
+model Farmer {
+  id             String   @id @default(uuid())
+  name           String   @db.VarChar(255)
+  nickname       String   @db.VarChar(255)
+  gender         String   @db.VarChar(255)
+  phone          String   @unique @db.Char(13)
+  cpf            String   @unique @db.Char(11)
+  address        String   @db.VarChar(255)
+  marital_status String   @db.VarChar(255)
+  credit_line    String   @db.VarChar(255)
+  course         String   @db.VarChar(255)
+  active         Boolean  @default(true)
+  family_id      String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  ServiceOrder ServiceOrder[]
+
+  agricuturalFamily AgricuturalFamily @relation(fields: [family_id], references: [id], onDelete: Cascade)
+
+  @@map("farmers")
+}
+
+model ServiceOrder {
+  id         String   @id @default(uuid())
+  name       String   @db.VarChar(255)
+  address    String   @db.VarChar(255)
+  start_date DateTime
+  end_date   DateTime
+  active     Boolean
+  farmer_id  String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  farmer Farmer @relation(fields: [farmer_id], references: [id], onDelete: Cascade)
+
+  @@map("serviceOrders")
 }

@@ -4,13 +4,13 @@ import { Farmer } from '@application/@shared/types/entities';
 import { Create, Update } from '@application/@shared/types/helpers';
 
 class FarmersRepository {
-  async findAll(user_id: string) {
-    const farmers = await prisma.farmer.findMany({ where: { user_id } });
+  async findAll(family_id: string) {
+    const farmers = await prisma.farmer.findMany({ where: { family_id } });
     return farmers;
   }
 
-  async findById(id: string) {
-    const farmer = await prisma.farmer.findUnique({ where: { id } });
+  async findById(id: string, family_id: string) {
+    const farmer = await prisma.farmer.findUnique({ where: { id, family_id } });
     return farmer;
   }
 
@@ -30,12 +30,16 @@ class FarmersRepository {
   }
 
   async update(data: Update<Farmer>) {
-    const farmer = await prisma.farmer.update({ data, where: { id: data.id } });
+    const farmer = await prisma.farmer.update({
+      data,
+      where: { id: data.id, family_id: data.family_id },
+    });
+
     return farmer;
   }
 
-  async delete(id: string) {
-    await prisma.farmer.delete({ where: { id } });
+  async delete(id: string, family_id: string) {
+    await prisma.farmer.delete({ where: { id, family_id } });
   }
 }
 
