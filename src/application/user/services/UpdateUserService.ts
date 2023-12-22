@@ -1,7 +1,7 @@
 import { User } from '@application/@shared/types/entities';
 import { Update } from '@application/@shared/types/helpers';
 
-import { AlreadyExistError, BadRequestError } from '@shared/errors';
+import { AlreadyExistError, UnprocessableError } from '@shared/errors';
 
 import { usersRepository } from '../infra/repositories';
 import { getUserService } from './GetUserService';
@@ -25,7 +25,7 @@ class UpdateUserService {
     address,
   }: ServiceInterface) {
     if (cpf.length !== 11) {
-      throw new BadRequestError('cpf must have 11 characters');
+      throw new UnprocessableError('cpf must have 11 characters');
     }
 
     const user = await getUserService.execute({ id });

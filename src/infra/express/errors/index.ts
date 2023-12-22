@@ -31,6 +31,12 @@ export class AlreadyExistError extends ApiError {
   }
 }
 
+export class UnprocessableError extends ApiError {
+  constructor(message: string) {
+    super(message, 422);
+  }
+}
+
 export class ServerError extends ApiError {
   constructor(message: string) {
     super(message, 500);

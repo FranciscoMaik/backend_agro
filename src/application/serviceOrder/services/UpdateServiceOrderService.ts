@@ -1,4 +1,4 @@
-import { BadRequestError } from '@infra/express/errors';
+import { UnprocessableError } from '@infra/express/errors';
 
 import { ServiceOrder } from '@application/@shared/types/entities';
 import { Update } from '@application/@shared/types/helpers';
@@ -38,7 +38,7 @@ class UpdateServiceOrderService {
     });
 
     if (start_date > end_date) {
-      throw new BadRequestError('start_date mus be greater then end_date');
+      throw new UnprocessableError('start_date mus be greater then end_date');
     }
 
     const data: Update<ServiceOrder> = {

@@ -1,7 +1,7 @@
 import { Farmer } from '@application/@shared/types/entities';
 import { Update } from '@application/@shared/types/helpers';
 
-import { AlreadyExistError, BadRequestError } from '@shared/errors';
+import { AlreadyExistError, UnprocessableError } from '@shared/errors';
 
 import farmersRepository from '../infra/repositories/FarmersRepository';
 import { getFarmerService } from './GetFarmerService';
@@ -37,11 +37,11 @@ class UpdateFarmerService {
     familyId,
   }: ServiceInterface) {
     if (cpf.length !== 11) {
-      throw new BadRequestError('cpf must have 11 characters');
+      throw new UnprocessableError('cpf must have 11 characters');
     }
 
     if (phone.length !== 13) {
-      throw new BadRequestError('phone must have 13 characters');
+      throw new UnprocessableError('phone must have 13 characters');
     }
 
     const farmer = await getFarmerService.execute({ id, propertyId, familyId });

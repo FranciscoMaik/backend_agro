@@ -2,7 +2,7 @@ import { Farmer } from '@application/@shared/types/entities';
 import { Create } from '@application/@shared/types/helpers';
 import { getAgricuturalFamilyService } from '@application/agricuturalFamily/services';
 
-import { AlreadyExistError, BadRequestError } from '@shared/errors';
+import { AlreadyExistError, UnprocessableError } from '@shared/errors';
 
 import farmersRepository from '../infra/repositories/FarmersRepository';
 
@@ -40,11 +40,11 @@ class CreateFarmerService {
     });
 
     if (cpf.length !== 11) {
-      throw new BadRequestError('cpf must have 11 characters');
+      throw new UnprocessableError('cpf must have 11 characters');
     }
 
     if (phone.length !== 13) {
-      throw new BadRequestError('phone must have 13 characters');
+      throw new UnprocessableError('phone must have 13 characters');
     }
 
     const farmerCpfExists = await farmersRepository.findByCpf(cpf);

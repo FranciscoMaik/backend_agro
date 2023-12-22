@@ -2,7 +2,7 @@ import { User } from '@application/@shared/types/entities';
 import { Create } from '@application/@shared/types/helpers';
 import { sendEmailVerificationCodeService } from '@application/auth/services';
 
-import { AlreadyExistError, BadRequestError } from '@shared/errors';
+import { AlreadyExistError, UnprocessableError } from '@shared/errors';
 
 import { Crypter } from '@libs';
 
@@ -27,7 +27,7 @@ class CreateUserService {
     address,
   }: ServiceInterface) {
     if (cpf.length !== 11) {
-      throw new BadRequestError('cpf must have 11 characters');
+      throw new UnprocessableError('cpf must have 11 characters');
     }
 
     const userEmailExists = await usersRepository.findByEmail(email);

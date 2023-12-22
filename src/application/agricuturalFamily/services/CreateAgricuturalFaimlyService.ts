@@ -1,4 +1,4 @@
-import { AlreadyExistError, BadRequestError } from '@infra/express/errors';
+import { AlreadyExistError, UnprocessableError } from '@infra/express/errors';
 
 import { AgricuturalFamily } from '@application/@shared/types/entities';
 import { Create } from '@application/@shared/types/helpers';
@@ -15,7 +15,7 @@ interface ServiceInterface {
 class CreateAgricuturalFamilyService {
   async execute({ name, members_amount, propertyId }: ServiceInterface) {
     if (members_amount <= 0) {
-      throw new BadRequestError('members_amount must bee greater then 0');
+      throw new UnprocessableError('members_amount must bee greater then 0');
     }
 
     const property = await getPropertyService.execute({ id: propertyId });
