@@ -12,6 +12,7 @@
 
     "paths": {
       "@libs": ["./libs/index"],
+      "@utils/*": ["./utils/*"],
       "@infra/*": ["./infra/*"],
       "@application/*": ["./application/*"],
       "@shared/*": ["./application/@shared/*"]

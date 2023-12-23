@@ -1,4 +1,4 @@
-import { userTokenExpiration } from 'utils/constants';
+import { userTokenExpiration } from '@utils/constants';
 
 import { usersRepository } from '@application/user/infra/repositories';
 

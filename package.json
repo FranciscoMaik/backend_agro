@@ -1,11 +1,15 @@
 {
   "name": "agro-server",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "license": "MIT",
+  "engines": {
+    "node": "20"
+  },
   "scripts": {
-    "build": "tsc",
-    "dev": "tsnd --watch --respawn --transpile-only --ignore-watch node_modules -r tsconfig-paths/register ./src/infra/cmd/server.ts"
+    "build": "tsc --project tsconfig.json && tscpaths -p tsconfig.json -s ./src -o ./build",
+    "dev": "tsnd --watch --respawn --transpile-only --ignore-watch node_modules -r tsconfig-paths/register ./src/infra/cmd/server.ts",
+    "start": "node ./build/infra/cmd/server.js"
   },
   "prisma": {
     "schema": "src/infra/prisma/schema.prisma"
@@ -25,6 +29,7 @@
     "prettier": "^3.0.3",
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
+    "tscpaths": "^0.0.9",
     "typescript": "^5.2.2"
   },
   "dependencies": {

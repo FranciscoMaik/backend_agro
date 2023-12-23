@@ -1,4 +1,4 @@
-import { isEmpty } from 'utils/validators';
+import { isEmpty } from '@utils/validators';
 
 import { BadRequestError } from '@shared/errors';
 
