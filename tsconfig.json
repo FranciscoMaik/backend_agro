@@ -3,7 +3,6 @@
     "target": "ES5",
     "module": "commonjs",
     "rootDir": "src",
-    "baseUrl": "src",
     "outDir": "./build",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -11,12 +10,13 @@
     "skipLibCheck": true,
     "moduleResolution": "node",
     
+    "baseUrl": ".",
     "paths": {
-      "@libs": ["./libs/index"],
-      "@utils/*": ["./utils/*"],
-      "@infra/*": ["./infra/*"],
-      "@application/*": ["./application/*"],
-      "@shared/*": ["./application/@shared/*"]
+      "@libs": ["src/libs/index"],
+      "@utils/*": ["src/utils/*"],
+      "@infra/*": ["src/infra/*"],
+      "@application/*": ["src/application/*"],
+      "@shared/*": ["src/application/@shared/*"]
     }
   },
   "include": ["src/**/*.ts"],
