@@ -13,7 +13,7 @@ import {
   updateValidator,
 } from '@application/farmer/infra/validators';
 
-import { serviceOrderRoutes } from '../serviceOrder';
+import { serviceOrderRoutes } from './serviceOrder';
 
 const farmerRoutes = Router({ mergeParams: true });
 

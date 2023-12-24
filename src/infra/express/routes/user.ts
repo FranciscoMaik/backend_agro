@@ -14,7 +14,7 @@ import {
   updateValidator,
 } from '@application/user/infra/validators';
 
-import { authMiddleware } from '../../middlewares';
+import { authMiddleware } from '../middlewares';
 
 const userRoutes = Router();
 
