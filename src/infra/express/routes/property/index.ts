@@ -16,7 +16,7 @@ import {
 
 import { agricuturalActivityRoutes } from './agricuturalActivity';
 // import { agricuturalFamilyRoutes } from './agricuturalFamily';
-// import { livestockActivityRoutes } from './livestockActivity';
+import { livestockActivityRoutes } from './livestockActivity';
 
 const propertyRoutes = Router();
 
@@ -34,10 +34,10 @@ propertyRoutes.delete('/:id', deletePropertyController.handle);
 
 // propertyRoutes.use('/:propertyId/agricutural-familys', agricuturalFamilyRoutes);
 
-// propertyRoutes.use(
-//   '/:propertyId/livestock-activities',
-//   livestockActivityRoutes,
-// );
+propertyRoutes.use(
+  '/:propertyId/livestock-activities',
+  livestockActivityRoutes,
+);
 
 propertyRoutes.use(
   '/:propertyId/agricutural-activities',
