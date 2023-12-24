@@ -12,7 +12,7 @@ import {
   updateValidator,
 } from '@application/agricuturalFamily/infra/validators';
 
-import { farmerRoutes } from './farmer';
+import { farmerRoutes } from '../farmer';
 
 const agricuturalFamilyRoutes = Router({ mergeParams: true });
 
