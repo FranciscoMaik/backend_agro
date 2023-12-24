@@ -15,8 +15,8 @@ import {
 } from '@application/property/infra/validators';
 
 import { agricuturalActivityRoutes } from './agricuturalActivity';
-import { agricuturalFamilyRoutes } from './agricuturalFamily';
-import { livestockActivityRoutes } from './livestockActivity';
+import { agricuturalFamilyRoutes } from './agricuturalFamily/index';
+import { livestockActivityRoutes } from './livestockActivity/index';
 
 const propertyRoutes = Router();
 
