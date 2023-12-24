@@ -15,8 +15,8 @@ import {
 } from '@application/property/infra/validators';
 
 import { agricuturalActivityRoutes } from './agricuturalActivity';
-import { agricuturalFamilyRoutes } from './agricuturalFamily/index';
-import { livestockActivityRoutes } from './livestockActivity/index';
+// import { agricuturalFamilyRoutes } from './agricuturalFamily';
+// import { livestockActivityRoutes } from './livestockActivity';
 
 const propertyRoutes = Router();
 
@@ -32,12 +32,12 @@ propertyRoutes.put('/:id', updateValidator, updatePropertyController.handle);
 
 propertyRoutes.delete('/:id', deletePropertyController.handle);
 
-propertyRoutes.use('/:propertyId/agricutural-familys', agricuturalFamilyRoutes);
+// propertyRoutes.use('/:propertyId/agricutural-familys', agricuturalFamilyRoutes);
 
-propertyRoutes.use(
-  '/:propertyId/livestock-activities',
-  livestockActivityRoutes,
-);
+// propertyRoutes.use(
+//   '/:propertyId/livestock-activities',
+//   livestockActivityRoutes,
+// );
 
 propertyRoutes.use(
   '/:propertyId/agricutural-activities',
